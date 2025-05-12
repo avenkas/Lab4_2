@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Подорожі по світу</title>
+
+    <!-- Підключення Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+      /* Основні стилі */
+      body {
+        background: #222933;
+        color: white;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Липке навігаційне меню */
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: #2c3e50;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .navbar {
+        padding: 15px 40px; /* Збільшені відступи */
+        width: 100%; /* Трохи ширше */
+        margin: auto;
+      }
+
+      .navbar-brand {
+        font-size: 24px;
+        font-weight: bold;
+        color: white !important;
+        margin-left: 15px;
+      }
+
+      .nav > li > a {
+        color: white !important;
+        font-size: 18px;
+        padding: 12px 18px;
+        transition: all 0.3s ease;
+      }
+
+      .nav > li > a:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Випадаючий список */
+      .dropdown-menu {
+        background: #2c3545;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        position: absolute;
+      }
+
+      .dropdown-menu a {
+        color: white !important;
+        padding: 10px;
+        display: block;
+        transition: all 0.3s ease;
+      }
+
+      .dropdown-menu a:hover {
+        background: #9b59b6;
+        color: black !important;
+      }
+
+      /* Карусель */
+      .carousel {
+        margin: 20px auto;
+        max-width: 900px;
+      }
+
+      .carousel img {
+        max-height: 400px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      /* Гарячі тури */
+      .card {
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        background: #2c3545;
+        text-align: center;
+        transition: all 0.3s ease;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+      }
+
+      .card img {
+        border-radius: 10px;
+        max-height: 200px;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      /* Фіолетові кнопки */
+      .btn-purple {
+        background-color: #9b59b6; /* Фіолетовий */
+        color: white;
+        border: none;
+        transition: all 0.3s ease;
+      }
+
+      .btn-purple:hover {
+        background-color: #8e44ad; /* Темніший фіолетовий */
+        color: white;
+      }
+
+      /* Адаптація для мобільних пристроїв */
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 10px 20px;
+        }
+
+        .navbar-brand {
+          font-size: 20px;
+          margin-left: 5px;
+        }
+
+        .nav > li > a {
+          font-size: 16px;
+          padding: 10px 15px;
+        }
+
+        .carousel img {
+          height: 300px; /* Менша висота для мобільних */
+          aspect-ratio: 16/9;
+        }
+
+        .footer {
+          padding: 15px;
+          font-size: 14px;
+        }
+      }
+
+      /* Футер */
+      .footer {
+        background: #2c3e50;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Навігаційне меню -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target="#myNavbar"
+          >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand fw-bold" href="#">🌍 TravelWorld</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                >Країни
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#ukraine">Україна</a></li>
+                <li><a href="#europe">Європа</a></li>
+                <li><a href="#asia">Азія</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                >Бронювання
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#hotels">Готелі</a></li>
+                <li><a href="#flights">Авіарейси</a></li>
+                <li><a href="#tours">Тури</a></li>
+              </ul>
+            </li>
+            <li><a href="#tours">Гарячі тури</a></li>
+            <li><a href="#contacts">Контакти</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Карусель -->
+    <div
+      id="travelCarousel"
+      class="carousel slide"
+      data-ride="carousel"
+      style="margin-top: 120px"
+    >
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="hague.jpg" alt="Гаага" />
+        </div>
+        <div class="item">
+          <img src="paris.jpg" alt="Париж" />
+        </div>
+        <div class="item">
+          <img src="seoul.jpg" alt="Сеул" />
+        </div>
+        <div class="item">
+          <img src="alicante.jpg" alt="Аліканте" />
+        </div>
+        <div class="item">
+          <img src="antalya.jpg" alt="Анталія" />
+        </div>
+        <div class="item">
+          <img src="rim.jpg" alt="Рим" />
+        </div>
+        <div class="item">
+          <img src="kair.jpg" alt="Каїр" />
+        </div>
+        <div class="item">
+          <img src="split.jpg" alt="Спліт" />
+        </div>
+      </div>
+      <a class="left carousel-control" href="#travelCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a
+        class="right carousel-control"
+        href="#travelCarousel"
+        data-slide="next"
+      >
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+
+    <!-- Гарячі тури -->
+    <div class="container">
+      <h2 class="text-center">Гарячі тури</h2>
+
+      <div style="height: 30px"></div>
+
+      <!-- Перший рядок -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card" style="margin-bottom: 20px">
+            <img src="hague.jpg" alt="Гаага" />
+            <h3>Гаага, Нідерланди</h3>
+            <p>5 днів за 500$.</p>
+            <a
+              href="#"
+              class="btn btn-purple btn-block"
+              data-toggle="tooltip"
+              title="Переглянути деталі туру"
+              >Детальніше</a
+            >
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card" style="margin-bottom: 20px">
+            <img src="paris.jpg" alt="Париж" />
+            <h3>Париж, Франція</h3>
+            <p>3 дні за 450$.</p>
+            <a
+              href="#"
+              class="btn btn-purple btn-block"
+              data-toggle="tooltip"
+              title="Переглянути деталі туру"
+              >Детальніше</a
+            >
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card" style="margin-bottom: 20px">
+            <img src="seoul.jpg" alt="Сеул" />
+            <h3>Сеул, Південна Корея</h3>
+            <p>7 днів за 1200$.</p>
+            <a
+              href="#"
+              class="btn btn-purple btn-block"
+              data-toggle="tooltip"
+              title="Переглянути деталі туру"
+              >Детальніше</a
+            >
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card" style="margin-bottom: 20px">
+            <img src="alicante.jpg" alt="Аліканте" />
+            <h3>Аліканте, Іспанія</h3>
+            <p>5 днів за 700$.</p>
+            <a
+              href="#"
+              class="btn btn-purple btn-block"
+              data-toggle="tooltip"
+              title="Переглянути деталі туру"
+              >Детальніше</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Відступ перед другим рядком -->
+      <div style="height: 30px"></div>
+
+      <!-- Другий рядок -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card" style="margin-bottom: 20px">
+            <img src="antalya.jpg" alt="Анталія" />
+            <h3>Анталія, Туреччина</h3>
+            <p>7 днів за 350$.</p>
+            <a
+              href="#"
+              class="btn btn-purple btn-block"
+              data-toggle="tooltip"
+              title="Переглянути деталі туру"
+              >Детальніше</a
+            >
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card" style="margin-bottom: 20px">
+            <img src="rim.jpg" alt="Рим" />
+            <h3>Рим, Італія</h3>
+            <p>4 дні за 400$.</p>
+            <a
+              href="#"
+              class="btn btn-purple btn-block"
+              data-toggle="tooltip"
+              title="Переглянути деталі туру"
+              >Детальніше</a
+            >
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card" style="margin-bottom: 20px">
+            <img src="kair.jpg" alt="Каїр" />
+            <h3>Каїр, Єгипет</h3>
+            <p>7 днів за 750$.</p>
+            <a
+              href="#"
+              class="btn btn-purple btn-block"
+              data-toggle="tooltip"
+              title="Переглянути деталі туру"
+              >Детальніше</a
+            >
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card" style="margin-bottom: 20px">
+            <img src="split.jpg" alt="Спліт" />
+            <h3>Спліт, Хорватія</h3>
+            <p>6 днів за 300$.</p>
+            <a
+              href="#"
+              class="btn btn-purple btn-block"
+              data-toggle="tooltip"
+              title="Переглянути деталі туру"
+              >Детальніше</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+      <p>© 2025 Подорожі по світу. Всі права захищені.</p>
+    </footer>
+  </body>
+</html>
